@@ -108,7 +108,7 @@ button { font: inherit; }
 .feedback-item:first-of-type { border-top: 0; }
 .feedback-item.is-user-choice { background: rgba(255,179,71,.06); margin: 0 -12px; padding: 20px 12px; border-radius: 14px; }
 .feedback-title { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; font-weight: 900; }
-.score-badge { color: var(--good); font-size: 1.2em; font-weight: 1000; letter-spacing: .02em; }
+
 .feedback-item p { margin: .6em 0; }
 .feedback-item blockquote { margin: .8em 0; padding: .2em 0 .2em 1em; border-left: 3px solid var(--accent); color: #dddbe1; }
 .footer-actions { text-align: center; margin-top: 32px; }
@@ -120,4 +120,45 @@ button { font: inherit; }
   .answers-head { flex-direction: column; }
   .nav-row > button { flex: 1; }
   .option-btn { grid-template-columns: 32px 1fr; padding: 16px; }
+}
+
+
+/* Answer-open score: no badge/circle; keep the number itself prominent. */
+.feedback-title {
+  align-items: baseline;
+  column-gap: 6px;
+  row-gap: 7px;
+}
+.answer-open-label {
+  font-weight: 950;
+  color: var(--accent-2);
+  letter-spacing: .02em;
+}
+.answer-open-text {
+  font-weight: 850;
+}
+.score-parentheses {
+  white-space: nowrap;
+  color: var(--muted);
+  font-weight: 750;
+}
+.score-value {
+  font-size: 1.28em;
+  line-height: 1;
+  color: var(--accent-2);
+  font-weight: 950;
+  text-shadow: 0 0 16px rgba(255,179,71,.22);
+}
+.perfect-mark {
+  font-size: 1.16em;
+  line-height: 1;
+}
+.question-body .situation {
+  margin: 0 0 18px;
+  padding: 11px 14px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255,255,255,.035);
+  border-radius: 0 10px 10px 0;
+  color: #f0edf4;
+  font-weight: 750;
 }
