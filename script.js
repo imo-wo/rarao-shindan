@@ -371,9 +371,6 @@ const results = {
 
 let current = 0;
 let answers = Array(questions.length).fill(null);
-let nickname = '';
-
-function displayName() { return nickname || 'あなた'; }
 
 const $ = (id) => document.getElementById(id);
 const screens = ['start-screen','quiz-screen','result-screen','answers-screen'];
@@ -386,7 +383,6 @@ function showScreen(id) {
 function renderQuestion() {
   const item = questions[current];
   $('question-number').textContent = `QUESTION ${String(current + 1).padStart(2,'0')} / ${questions.length}`;
-  $('player-name').textContent = `${displayName()}さん`;
   $('progress-bar').style.width = `${((current + 1) / questions.length) * 100}%`;
   $('question-title').textContent = `Q${current + 1}｜${item.title}`;
   $('question-body').innerHTML = item.body;
@@ -441,7 +437,6 @@ function getResult() {
 function renderResult() {
   const { total } = getStats();
   const result = getResult();
-  $('result-name').textContent = `${displayName()}さんの響きあい度`;
   $('result-kicker').textContent = result.kicker;
   $('result-icon').textContent = result.icon;
   $('result-title').textContent = result.title;
@@ -453,7 +448,6 @@ function renderResult() {
 function renderAnswers() {
   const container = $('answer-list');
   container.innerHTML = '';
-  $('answer-player-name').textContent = displayName();
 
   questions.forEach((item, idx) => {
     const selectedLetter = answers[idx];
@@ -493,30 +487,14 @@ function renderAnswers() {
 function resetQuiz() {
   current = 0;
   answers = Array(questions.length).fill(null);
-  nickname = '';
-  $('nickname-input').value = '';
-  $('name-error').textContent = '';
   renderQuestion();
   showScreen('start-screen');
 }
 
-function beginQuiz() {
-  const value = $('nickname-input').value.trim();
-  if (!value) {
-    $('name-error').textContent = 'ニックネームを入れてください。';
-    $('nickname-input').focus();
-    return;
-  }
-  nickname = value;
-  $('name-error').textContent = '';
+$('start-btn').addEventListener('click', () => {
   current = 0;
   renderQuestion();
   showScreen('quiz-screen');
-}
-
-$('start-btn').addEventListener('click', beginQuiz);
-$('nickname-input').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') beginQuiz();
 });
 
 $('back-btn').addEventListener('click', () => {
